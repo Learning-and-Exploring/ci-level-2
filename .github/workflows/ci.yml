@@ -1,0 +1,39 @@
+name: level 2
+
+on:
+  push:
+    branches:
+      - main
+    
+  pull_request:
+    branches:
+      - main
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+
+      - name: Set Up Express
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install All Dependencies
+        run: npm ci
+
+      - name: Build App
+        run: npm run build
+
+      - name: Run Tests
+        run: npm test
+
+    
+
